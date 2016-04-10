@@ -2,9 +2,8 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Action {
+class Action extends Abstract_Part {
 	protected $registered = [ ];
-
 
 	/**
 	 * @param $action
@@ -13,11 +12,12 @@ class Action {
 	 */
 	public function expect( $action, $priority = 10, $accepted_args = 1 ) {
 
-		$mock   = \Mockery::mock( $action );
-		$handle = $mock->shouldReceive( 'handle' );
+		$mock   = $this->getInterceptorMock();
+		
+		$handle = $mock->shouldDeferMissing()->shouldReceive( 'noop' );
 		$handle->atLeast()->once();
 
-		$this->add_action( $action, array( $mock, 'handle' ), $priority, $accepted_args );
+		$this->add_action( $action, array( $mock, 'noop' ), $priority, $accepted_args );
 
 		return $handle;
 	}

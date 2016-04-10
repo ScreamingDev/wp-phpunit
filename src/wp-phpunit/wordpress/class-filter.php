@@ -2,9 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-use WP_PHPUnit\Framework\Interceptor;
-
-class Filter {
+class Filter extends Abstract_Part {
 	protected $registered = [ ];
 
 	public function expect( $tag, $priority = 10, $accepted_args = 1 ) {
@@ -38,12 +36,5 @@ class Filter {
 				remove_filter( $tag, $added_function );
 			}
 		}
-	}
-
-	/**
-	 * @return \Mockery\MockInterface
-	 */
-	protected function getInterceptorMock() {
-		return \Mockery::instanceMock(new Interceptor());
 	}
 }
