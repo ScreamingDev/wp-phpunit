@@ -18,6 +18,12 @@ or reset everything to have a clean environment
 
 	\WP_PHPUnit::wp()->reset();
 
+This supports:
+
+- WordPress 4.0 to 4.5
+- PHP 5.5 to 7.0
+- Due to wp-cli HHVM can not be tested yet :(
+
 ## Actions
 
 ### Expect actions
