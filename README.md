@@ -51,7 +51,9 @@ Or a bit more detailled:
 
 ## Filter
 
-Assert the execution of filter:
+### Assertion on filter
+
+Expect the execution of a filter:
 
 	\WP_PHPUnit::wp()->filter()->expect( $tag );
 
@@ -65,3 +67,9 @@ Or a bit more detailled:
 
 	// or both
 	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( 'value1' )->atMost()->once();
+
+### Disable filter
+
+When a filter disturbs your testing then disable it for this particular test:
+
+	\WP_PHPUnit::wp()->filter()->disable( $tag, $function_name );
