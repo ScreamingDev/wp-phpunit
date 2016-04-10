@@ -88,4 +88,13 @@ class WordPress_Autoload {
 
 		return $filename;
 	}
+
+	/**
+	 * Add a directory to look up classes in WordPress-Style
+	 *
+	 * @param string $path Directory to search in.
+	 */
+	public static function register_directory( $path ) {
+		static::$_directories[] = $path;
+	}
 }
