@@ -4,17 +4,13 @@ namespace WP_PHPUnit\Framework;
 
 class Test_Case extends \PHPUnit_Framework_TestCase {
 	/**
-	 * @var \WP_PHPUnit
+	 * @return \WP_PHPUnit\WordPress
 	 */
-	protected $_wp = null;
-
 	public function wp() {
 		return \WP_PHPUnit::wp();
 	}
 
-	protected function tearDown() {
+	public function tearDown() {
 		\WP_PHPUnit::tearDown();
 	}
-
-
 }
