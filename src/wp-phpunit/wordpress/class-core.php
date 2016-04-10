@@ -9,9 +9,9 @@ class Core extends Abstract_Part {
 	public function expectWpDie() {
 		$mock = \Mockery::mock( 'wp_die' );
 
-		add_filter( 'wp_die_ajax_handler', [ $mock, 'run' ] );
-		add_filter( 'wp_die_xmlrpc_handler', [ $mock, 'run' ] );
-		add_filter( 'wp_die_handler', [ $mock, 'run' ] );
+		$this->add_filter( 'wp_die_ajax_handler', [ $mock, 'run' ] );
+		$this->add_filter( 'wp_die_xmlrpc_handler', [ $mock, 'run' ] );
+		$this->add_filter( 'wp_die_handler', [ $mock, 'run' ] );
 
 		$handle = $mock->shouldReceive( 'run' );
 		$handle->andReturn( '__return_null' );
