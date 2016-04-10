@@ -33,6 +33,7 @@ class WordPress {
 	}
 
 	public function reset() {
+		$this->core()->reset();
 		$this->filter()->reset();
 		$this->action()->reset();
 	}
