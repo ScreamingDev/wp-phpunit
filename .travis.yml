@@ -9,6 +9,7 @@ php:
   - 5.5
   - 5.6
   - 7.0
+  - hhvm
 
 env:
   - WP_VERSION=4.5-beta3    WP_MULTISITE=0
@@ -23,7 +24,7 @@ before_install:
 
 before_script:
   - composer self-update
-  - composer -q install
+  - composer install
 
 script: ./bin/test-ci.sh
 
