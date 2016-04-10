@@ -2,24 +2,20 @@
 
 namespace WP_PHPUnit\WordPress;
 
+use WP_PHPUnit\Framework\Interceptor;
+
 class Filter {
 	protected $registered = [ ];
 
 	public function expect( $tag, $priority = 10, $accepted_args = 1 ) {
 
-		$name = $this->sanitizeClassName( 'filter_' . $tag );
+		$mock = $this->getInterceptorMock();
 
-		$mock   = \Mockery::mock( $name );
-		$handle = $mock->shouldReceive( 'handle' );
-		$handle->withAnyArgs()->andReturnUsing(
-			function ( $value ) {
-				return $value;
-			}
-		);
+		$handle = $mock->shouldDeferMissing()->shouldReceive( 'passthrough' );
 
-		$handle->atLeast()->once();
+		$handle->withAnyArgs()->atLeast()->once()->passthru();
 
-		$this->add( $tag, [ $mock, 'handle' ], $priority, $accepted_args );
+		$this->add( $tag, [ $mock, 'passthrough' ], $priority, $accepted_args );
 
 		return $handle;
 	}
@@ -42,5 +38,12 @@ class Filter {
 				remove_filter( $tag, $added_function );
 			}
 		}
+	}
+
+	/**
+	 * @return \Mockery\MockInterface
+	 */
+	protected function getInterceptorMock() {
+		return \Mockery::instanceMock(new Interceptor());
 	}
 }

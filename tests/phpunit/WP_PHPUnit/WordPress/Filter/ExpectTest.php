@@ -49,7 +49,20 @@ class ExpectTest extends \PHPUnit_Framework_TestCase {
 		apply_filters( $tag, null );
 
 		\Mockery::close();
+	}
 
+	public function testItCanWatchOnFilterWithSpecificArguments() {
+		$tag   = uniqid( 'wp_phpunit' );
+		$value = uniqid( 'correct_one_' );
+
+		\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value )->atMost()->once();
+		\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value );
+
+		apply_filters( $tag, uniqid( 'other_' ) );
+		apply_filters( $tag, $value );
+		apply_filters( $tag, uniqid( 'other_' ) );
+
+		\Mockery::close();
 	}
 
 	protected function tearDown() {
