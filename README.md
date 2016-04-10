@@ -30,12 +30,12 @@ This supports:
 
 Write your test and assert the execution of actions:
 
-	\WP_PHPUnit::wp()->action()->expect( $tag )->with( $value );
+	\WP_PHPUnit::wp()->action()->expect( $tag );
 
 Or a bit more detailled:
 
 	// expect it not more than once
-	\WP_PHPUnit::wp()->action()->expect( $tag )->with( $value )->atMost()->once();
+	\WP_PHPUnit::wp()->action()->expect( $tag )->atMost()->once();
     
 	// expect the action with specific values
 	\WP_PHPUnit::wp()->action()->expect( $tag )->with( [ 'value1', 'value2' ] );
@@ -53,15 +53,15 @@ Or a bit more detailled:
 
 Assert the execution of filter:
 
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value );
+	\WP_PHPUnit::wp()->filter()->expect( $tag );
 
 Or a bit more detailled:
 
 	// expect it not more than once
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value )->atMost()->once();
+	\WP_PHPUnit::wp()->filter()->expect( $tag )->atMost()->once();
     
 	// expect the filter with specific values
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( [ 'value1', 'value2' ] );
+	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( 'value1' );
 
 	// or both
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( [ 'value1', 'value2' ] )->atMost()->once();
+	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( 'value1' )->atMost()->once();
