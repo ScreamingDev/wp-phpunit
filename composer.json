@@ -7,8 +7,8 @@
     "phpunit/phpunit": "~4"
   },
   "require-dev": {
-    "composer/composer": "1.0.0@dev",
-    "wp-cli/wp-cli": "0.23.*"
+    "composer/composer": "1.0.0-alpha11",
+    "wp-cli/wp-cli": "0.23.0"
   },
   "config": {
     "bin-dir": "bin"
