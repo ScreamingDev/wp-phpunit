@@ -47,7 +47,26 @@ Or a bit more detailled:
 
 ### Check for `wp_die`
 
+Disable or just check if `wp_die` has been used:
+
 	\WP_PHPUnit::wp()->core()->expectWpDie();
+
+### Check for redirects
+
+Test if `wp_redirect` is used:
+
+	\WP_PHPUnit::wp()->core()->expectWpRedirect();
+
+You can check for specific arguments:
+
+	// A location and some status
+	\WP_PHPUnit::wp()->core()->expectWpRedirect( 'http://example.org', anything() );
+	
+	// Any location and a specific status
+	\WP_PHPUnit::wp()->core()->expectWpRedirect( anything(), 303 );
+	
+	// A specific location and status exactly once
+	\WP_PHPUnit::wp()->core()->expectWpRedirect( 'http://example.org', 303 )->times(1);
 
 ## Filter
 

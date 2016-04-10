@@ -19,4 +19,21 @@ class Core extends Abstract_Part {
 
 		return $handle;
 	}
+
+	/**
+	 * @return \Mockery\Expectation
+	 */
+	public function expectWpRedirect() {
+		$mock   = $this->getInterceptorMock();
+		$handle = $mock->shouldDeferMissing()
+		               ->shouldReceive( 'passthrough' )
+		               ->withAnyArgs()
+		               ->atLeast()->once()
+		               ->passthru();
+
+		$this->add_filter( 'wp_redirect', [ $mock, 'passthrough' ], 10, 2 );
+		$this->add_filter( 'wp_redirect', '__return_false', PHP_INT_MAX );
+
+		return $handle;
+	}
 }
