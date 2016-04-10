@@ -25,15 +25,6 @@ class WordPress_Autoload {
 	protected static $_directories = [ ];
 
 	/**
-	 * Directories where classes will be searched.
-	 *
-	 * @return \string[]
-	 */
-	public static function get_directories() {
-		return static::$_directories;
-	}
-
-	/**
 	 * Search class in include path and load it.
 	 *
 	 * @param string $class_name The class name.
@@ -96,24 +87,5 @@ class WordPress_Autoload {
 		);
 
 		return $filename;
-	}
-
-	/**
-	 * Register this loader.
-	 */
-	public static function register() {
-		\spl_autoload_register(
-			array( __CLASS__, 'load_class' )
-		);
-
-	}
-
-	/**
-	 * Add a directory to look up classes in WordPress-Style
-	 *
-	 * @param string $path Directory to search in.
-	 */
-	public static function register_directory( $path ) {
-		static::$_directories[] = $path;
 	}
 }
