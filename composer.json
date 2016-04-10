@@ -2,8 +2,13 @@
   "name": "sourcerer-mike/wp-phpunit",
   "description": "Extend PHPUnit for easier testing WordPress Projects.",
   "require": {
+    "antecedent/patchwork": "~1",
     "mockery/mockery": "0.9.*",
     "phpunit/phpunit": "~4"
+  },
+  "require-dev": {
+    "composer/composer": "1.0.0@dev",
+    "wp-cli/wp-cli": "0.23.*"
   },
   "config": {
     "bin-dir": "bin"
