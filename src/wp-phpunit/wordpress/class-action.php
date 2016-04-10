@@ -2,20 +2,20 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Action extends Abstract_Part {
+class Action extends Abstract_Named_Part {
 	/**
 	 * @param $action
 	 *
 	 * @return \Mockery\Expectation
 	 */
-	public function expect( $action, $priority = 10, $accepted_args = 1 ) {
+	public function expected() {
 
 		$mock = $this->getInterceptorMock();
 
 		$handle = $mock->shouldDeferMissing()->shouldReceive( 'noop' );
 		$handle->atLeast()->once();
 
-		$this->add( $action, array( $mock, 'noop' ), $priority, $accepted_args );
+		$this->add( $this->getName(), array( $mock, 'noop' ) );
 
 		return $handle;
 	}

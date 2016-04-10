@@ -5,8 +5,8 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 		$tag   = uniqid( 'wp_phpunit' );
 		$value = uniqid( 'correct_one_' );
 
-		\WP_PHPUnit::wp()->action()->expect( $tag )->with( $value )->atMost()->once();
-		\WP_PHPUnit::wp()->action()->expect( $tag )->with( $value );
+		\WP_PHPUnit::wp()->action( $tag )->expected()->with( $value )->atMost()->once();
+		\WP_PHPUnit::wp()->action( $tag )->expected()->with( $value );
 
 		do_action( $tag, uniqid( 'other_' ) );
 		do_action( $tag, $value );
@@ -17,7 +17,7 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 
 	public function testItRecognizesIfAnActionHasRun() {
 		$action = uniqid( 'wp_phpunit' );
-		\WP_PHPUnit::wp()->action()->expect( $action );
+		\WP_PHPUnit::wp()->action( $action )->expected();
 
 		do_action( $action );
 	}
@@ -28,7 +28,7 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 	public function testItThrowsOutOfBoundsExceptionIfTheActionHasNotRun() {
 		$action = uniqid( 'wp_phpunit' );
 
-		\WP_PHPUnit::wp()->action()->expect( $action );
+		\WP_PHPUnit::wp()->action( $action )->expected();
 
 		\Mockery::close();
 	}
@@ -38,7 +38,7 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 	 */
 	public function testTheAmountOfExpectedCallsCanBeChanged() {
 		$action = uniqid( 'wp_phpunit' );
-		\WP_PHPUnit::wp()->action()->expect( $action )->atLeast()->twice();
+		\WP_PHPUnit::wp()->action( $action )->expected()->atLeast()->twice();
 
 		do_action( $action );
 
