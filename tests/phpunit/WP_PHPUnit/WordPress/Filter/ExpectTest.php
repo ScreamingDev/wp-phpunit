@@ -3,10 +3,24 @@
 namespace WP_PHPUnit\Tests\PHPUnit\WordPress\Filter;
 
 class ExpectTest extends \PHPUnit_Framework_TestCase {
+	public function testItCanWatchOnFilterWithSpecificArguments() {
+		$tag   = uniqid( 'wp_phpunit' );
+		$value = uniqid( 'correct_one_' );
+
+		\WP_PHPUnit::wp()->filter( $tag )->expected()->with( $value )->atMost()->once();
+		\WP_PHPUnit::wp()->filter( $tag )->expected()->with( $value );
+
+		apply_filters( $tag, uniqid( 'other_' ) );
+		apply_filters( $tag, $value );
+		apply_filters( $tag, uniqid( 'other_' ) );
+
+		\Mockery::close();
+	}
+
 	public function testItDoesNotHarmTheValue() {
 		$filter = uniqid( 'wp_phpunit' );
 
-		\WP_PHPUnit::wp()->filter()->expect( $filter );
+		\WP_PHPUnit::wp()->filter( $filter )->expected();
 
 		$before = uniqid();
 
@@ -18,7 +32,7 @@ class ExpectTest extends \PHPUnit_Framework_TestCase {
 	public function testItRecognizesIfAnFilterHasRun() {
 		$filter = uniqid( 'wp_phpunit' );
 
-		\WP_PHPUnit::wp()->filter()->expect( $filter );
+		\WP_PHPUnit::wp()->filter( $filter )->expected();
 
 		apply_filters( $filter, null );
 
@@ -31,7 +45,7 @@ class ExpectTest extends \PHPUnit_Framework_TestCase {
 	public function testItThrowsOutOfBoundsExceptionIfTheFilterHasNotRun() {
 		$tag = uniqid( 'wp_phpunit' );
 
-		\WP_PHPUnit::wp()->filter()->expect( $tag );
+		\WP_PHPUnit::wp()->filter( $tag )->expected();
 
 		\Mockery::close();
 
@@ -42,25 +56,10 @@ class ExpectTest extends \PHPUnit_Framework_TestCase {
 	 */
 	public function testTheAmountOfExpectedCallsCanBeChanged() {
 		$tag = uniqid( 'wp_phpunit' );
-		\WP_PHPUnit::wp()->filter()->expect( $tag )->atMost()->twice();
+		\WP_PHPUnit::wp()->filter( $tag )->expected()->times(3);
 
 		apply_filters( $tag, null );
 		apply_filters( $tag, null );
-		apply_filters( $tag, null );
-
-		\Mockery::close();
-	}
-
-	public function testItCanWatchOnFilterWithSpecificArguments() {
-		$tag   = uniqid( 'wp_phpunit' );
-		$value = uniqid( 'correct_one_' );
-
-		\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value )->atMost()->once();
-		\WP_PHPUnit::wp()->filter()->expect( $tag )->with( $value );
-
-		apply_filters( $tag, uniqid( 'other_' ) );
-		apply_filters( $tag, $value );
-		apply_filters( $tag, uniqid( 'other_' ) );
 
 		\Mockery::close();
 	}

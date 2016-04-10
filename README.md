@@ -74,21 +74,21 @@ You can check for specific arguments:
 
 Expect the execution of a filter:
 
-	\WP_PHPUnit::wp()->filter()->expect( $tag );
+	\WP_PHPUnit::wp()->filter( $tag )->expected();
 
 Or a bit more detailled:
 
 	// expect it not more than once
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->atMost()->once();
+	\WP_PHPUnit::wp()->filter( $tag )->expected()->atMost()->once();
     
 	// expect the filter with specific values
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( 'value1' );
+	\WP_PHPUnit::wp()->filter( $tag )->expected()->with( 'value1' );
 
 	// or both
-	\WP_PHPUnit::wp()->filter()->expect( $tag )->with( 'value1' )->atMost()->once();
+	\WP_PHPUnit::wp()->filter( $tag )->expected()->with( 'value1' )->atMost()->once();
 
 ### Disable filter
 
 When a filter disturbs your testing then disable it for this particular test:
 
-	\WP_PHPUnit::wp()->filter()->disable( $tag, $function_name );
+	\WP_PHPUnit::wp()->filter( $tag )->disable( $function_name );

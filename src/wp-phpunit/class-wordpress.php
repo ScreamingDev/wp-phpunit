@@ -14,8 +14,7 @@ class WordPress {
 	protected $_parts;
 
 	public function __construct() {
-		$this->_core   = new Core();
-		$this->_filter = new Filter();
+		$this->_core = new Core();
 	}
 
 	/**
@@ -28,9 +27,18 @@ class WordPress {
 		return $action;
 	}
 
+	/**
+	 * @return Filter
+	 */
+	public function filter( $identifier ) {
+		$filter         = new Filter( $identifier );
+		$this->_parts[] = $filter;
+
+		return $filter;
+	}
+
 	public function reset() {
 		$this->core()->reset();
-		$this->filter()->reset();
 
 		foreach ( $this->_parts as $part ) {
 			/** @var Abstract_Part $part */
@@ -43,12 +51,5 @@ class WordPress {
 	 */
 	public function core() {
 		return $this->_core;
-	}
-
-	/**
-	 * @return Filter
-	 */
-	public function filter() {
-		return $this->_filter;
 	}
 }

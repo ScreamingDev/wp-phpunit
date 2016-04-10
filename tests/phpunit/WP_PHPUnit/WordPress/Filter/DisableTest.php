@@ -12,7 +12,7 @@ class DisableTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( apply_filters( $name, true ) );
 
-		\WP_PHPUnit::wp()->filter()->disable( $name, '__return_false' );
+		\WP_PHPUnit::wp()->filter( $name )->disable( '__return_false' );
 
 		$this->assertTrue( apply_filters( $name, true ) );
 	}
@@ -26,17 +26,17 @@ class DisableTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertFalse( apply_filters( $name, true ) );
 
-		\WP_PHPUnit::wp()->filter()->disable( $name, '__return_false' );
+		\WP_PHPUnit::wp()->filter( $name )->disable( '__return_false' );
 
 		$this->assertTrue( apply_filters( $name, true ) );
 
-		\WP_PHPUnit::wp()->filter()->reset();
+		\WP_PHPUnit::wp()->reset();
 
 		$this->assertFalse( apply_filters( $name, true ) );
 	}
 
 	public function testItThrowsNoExceptionWhenFilterDoesNotExist() {
-		\WP_PHPUnit::wp()->filter()->disable( uniqid(), '__return_false' );
+		\WP_PHPUnit::wp()->filter( uniqid() )->disable( '__return_false' );
 	}
 
 	/**
@@ -47,6 +47,6 @@ class DisableTest extends \PHPUnit_Framework_TestCase {
 
 		add_filter( $tag, '__return_false' );
 
-		\WP_PHPUnit::wp()->filter()->disable( uniqid(), uniqid( 'wp_phpunit' ) );
+		\WP_PHPUnit::wp()->filter( $tag )->disable( uniqid( 'wp_phpunit' ) );
 	}
 }
