@@ -2,7 +2,7 @@
 
 class ExpectWpDieTest extends PHPUnit_Framework_TestCase {
 	public function testItRecognizesIfWpDieHasRun() {
-		\WP_PHPUnit::wp()->expectWpDie();
+		\WP_PHPUnit::wp()->core()->expectWpDie();
 
 		wp_die();
 	}
@@ -11,7 +11,7 @@ class ExpectWpDieTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Mockery\Exception\InvalidCountException
 	 */
 	public function testItThrowsOutOfBoundsExceptionIfWpDieHasNotRun() {
-		\WP_PHPUnit::wp()->expectWpDie();
+		\WP_PHPUnit::wp()->core()->expectWpDie();
 
 		\Mockery::close();
 	}
@@ -20,7 +20,7 @@ class ExpectWpDieTest extends PHPUnit_Framework_TestCase {
 	 * @expectedException \Mockery\Exception\InvalidCountException
 	 */
 	public function testTheAmountOfExpectedCallsCanBeChanged() {
-		\WP_PHPUnit::wp()->expectWpDie()->atLeast()->twice();
+		\WP_PHPUnit::wp()->core()->expectWpDie()->atLeast()->twice();
 
 		wp_die();
 

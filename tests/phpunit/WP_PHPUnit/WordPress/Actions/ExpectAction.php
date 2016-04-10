@@ -3,7 +3,7 @@
 class ExpectAction extends PHPUnit_Framework_TestCase {
 	public function testItRecognizesIfAnActionHasRun() {
 		$action = uniqid('wp_phpunit');
-		\WP_PHPUnit::wp()->actions()->expect($action);
+		\WP_PHPUnit::wp()->action()->expect($action);
 
 		do_action($action);
 	}
@@ -14,7 +14,7 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 	public function testItThrowsOutOfBoundsExceptionIfTheActionHasNotRun() {
 		$action = uniqid('wp_phpunit');
 
-		\WP_PHPUnit::wp()->actions()->expect($action);
+		\WP_PHPUnit::wp()->action()->expect($action);
 
 		\Mockery::close();
 	}
@@ -24,7 +24,7 @@ class ExpectAction extends PHPUnit_Framework_TestCase {
 	 */
 	public function testTheAmountOfExpectedCallsCanBeChanged() {
 		$action = uniqid('wp_phpunit');
-		\WP_PHPUnit::wp()->actions()->expect($action)->atLeast()->twice();
+		\WP_PHPUnit::wp()->action()->expect($action)->atLeast()->twice();
 
 		do_action($action);
 

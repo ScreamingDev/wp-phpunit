@@ -1,9 +1,9 @@
 <?php
 
-namespace WP_PHPUnit;
+namespace WP_PHPUnit\WordPress;
 
-class Actions {
-	protected $_expected = [ ];
+class Action {
+	protected $registered = [ ];
 
 
 	/**
@@ -23,11 +23,11 @@ class Actions {
 	}
 
 	public function add_action( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
-		if ( ! isset( $this->_expected[ $tag ] ) ) {
-			$this->_expected[ $tag ] = [ ];
+		if ( ! isset( $this->registered[ $tag ] ) ) {
+			$this->registered[ $tag ] = [ ];
 		}
 
-		$this->_expected[ $tag ][] = $function_to_add;
+		$this->registered[ $tag ][] = $function_to_add;
 
 		add_action( $tag, $function_to_add, $priority, $accepted_args );
 	}
@@ -35,12 +35,12 @@ class Actions {
 	/**
 	 * @return array
 	 */
-	public function getExpected() {
-		return $this->_expected;
+	protected function getRegistered() {
+		return $this->registered;
 	}
 
 	public function reset() {
-		foreach ( $this->_expected as $action => $callbacks ) {
+		foreach ( $this->registered as $action => $callbacks ) {
 			foreach ( $callbacks as $added_function ) {
 				remove_action( $action, $added_function );
 			}
