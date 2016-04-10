@@ -16,10 +16,7 @@
 
     <filter>
         <whitelist>
-            <directory>includes</directory>
-            <file>autoload.php</file>
-            <file>bootstrap.php</file>
-            <file>comfort.php</file>
+            <directory>src</directory>
         </whitelist>
     </filter>
 
