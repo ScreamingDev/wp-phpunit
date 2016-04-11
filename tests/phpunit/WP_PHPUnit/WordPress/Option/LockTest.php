@@ -10,7 +10,7 @@ class LockTest extends \PHPUnit_Framework_TestCase {
 
 		$this->assertNotEquals( $value, get_option( $option ) );
 
-		\WP_PHPUnit::wp()->option( $option )->set( $value );
+		\WP_PHPUnit::wp()->option( $option )->lockValue( $value );
 
 		$this->assertEquals( $value, get_option( $option ) );
 
@@ -23,11 +23,59 @@ class LockTest extends \PHPUnit_Framework_TestCase {
 		$option  = 'site_url';
 		$siteUrl = get_option( $option );
 
-		\WP_PHPUnit::wp()->option( $option )->lock();
+		\WP_PHPUnit::wp()->option( $option )->lockValue();
 
 		update_option( $option, uniqid() );
 
 		$this->assertEquals( $siteUrl, get_option( $option ) );
+	}
+
+	public function testOtherOptionsAreNotHarmed() {
+		$option      = uniqid();
+		$value       = uniqid();
+		$otherOption = uniqid();
+		$otherValue  = uniqid();
+
+		$this->assertNotEquals( $value, get_option( $option ) );
+
+		update_option( $option, $value );
+
+		\WP_PHPUnit::wp()->option( $option )->lockValue();
+
+		update_option( $option, uniqid() );
+
+		$this->assertEquals( $value, get_option( $option ) );
+
+		update_option( $otherOption, $otherValue );
+
+		$this->assertNotEquals( $value, get_option( $otherOption ) );
+		$this->assertEquals( $otherValue, get_option( $otherOption ) );
+	}
+
+	public function testItNoLongerForceAValueAfterResetting() {
+		$option = uniqid();
+		$value  = uniqid();
+
+		$this->assertNotEquals( $value, get_option( $option ) );
+
+		\WP_PHPUnit::wp()->option( $option )->lockValue( $value );
+
+		$this->assertEquals( $value, get_option( $option ) );
+	}
+
+	public function testItPersistTheValueOfAnOption() {
+		$option = uniqid();
+		$value  = uniqid();
+
+		$this->assertNotEquals( $value, get_option( $option ) );
+
+		\WP_PHPUnit::wp()->option( $option )->lockValue( $value );
+
+		$this->assertEquals( $value, get_option( $option ) );
+
+		\WP_PHPUnit::wp()->reset();
+
+		$this->assertNotEquals( $value, get_option( $option ) );
 	}
 
 	protected function tearDown() {

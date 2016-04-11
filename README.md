@@ -106,8 +106,8 @@ Removed filter will be recovered during `\WP_PHPUnit::tearDown()`.
 
 Make an option unchangeable
 
-	\WP_PHPUnit::wp()->option( $tag )->lock();
-
-or force one value for the complete test:
-
-	\WP_PHPUnit::wp()->option( $tag )->set( $value );
+	// Keep the value
+	\WP_PHPUnit::wp()->option( $tag )->lockValue();
+	
+	// or have one for the whole test
+	\WP_PHPUnit::wp()->option( $tag )->lockValue( $value );
