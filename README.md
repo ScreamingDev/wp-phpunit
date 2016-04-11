@@ -60,13 +60,13 @@ Test if `wp_redirect` is used:
 You can check for specific arguments:
 
 	// A location and some status
-	\WP_PHPUnit::wp()->core()->expectWpRedirect( 'http://example.org', anything() );
+	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( 'http://example.org', anything() );
 	
 	// Any location and a specific status
-	\WP_PHPUnit::wp()->core()->expectWpRedirect( anything(), 303 );
+	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( anything(), 303 );
 	
-	// A specific location and status exactly once
-	\WP_PHPUnit::wp()->core()->expectWpRedirect( 'http://example.org', 303 )->times(1);
+	// Or a specific location and status exactly once
+	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( 'http://example.org', 303 )->times(1);
 
 ## Filter
 
