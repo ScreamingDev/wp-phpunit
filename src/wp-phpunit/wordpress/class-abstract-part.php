@@ -23,7 +23,6 @@ abstract class Abstract_Part {
 			unset( $this->_removed_filter[ $tag ] );
 		}
 
-
 		// removed mocked actions
 		foreach ( $this->_registered_filter as $tag => $functions ) {
 			foreach ( $functions as $callable ) {

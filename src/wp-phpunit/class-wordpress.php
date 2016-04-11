@@ -6,6 +6,7 @@ use WP_PHPUnit\WordPress\Abstract_Part;
 use WP_PHPUnit\WordPress\Action;
 use WP_PHPUnit\WordPress\Core;
 use WP_PHPUnit\WordPress\Filter;
+use WP_PHPUnit\WordPress\Option;
 
 class WordPress {
 
@@ -36,6 +37,18 @@ class WordPress {
 		$name = 'filter::' . $identifier;
 		if ( ! isset( $this->_parts[ $name ] ) || ! $this->_parts[ $name ] ) {
 			$this->_parts[ $name ] = new Filter( $identifier );
+		}
+
+		return $this->_parts[ $name ];
+	}
+
+	/**
+	 * @return \WP_PHPUnit\WordPress\Option
+	 */
+	public function option( $identifier ) {
+		$name = 'option::' . $identifier;
+		if ( ! isset( $this->_parts[ $name ] ) || ! $this->_parts[ $name ] ) {
+			$this->_parts[ $name ] = new Option( $identifier );
 		}
 
 		return $this->_parts[ $name ];

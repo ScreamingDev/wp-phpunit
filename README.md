@@ -99,3 +99,15 @@ Or just a specific function using:
 
 Complete filters can be removed only once during a test-method.
 Removed filter will be recovered during `\WP_PHPUnit::tearDown()`.
+
+## Options
+
+### Freeze values
+
+Make an option unchangeable
+
+	\WP_PHPUnit::wp()->option( $tag )->lock();
+
+or force one value for the complete test:
+
+	\WP_PHPUnit::wp()->option( $tag )->set( $value );
