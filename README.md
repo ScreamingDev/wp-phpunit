@@ -91,4 +91,11 @@ Or a bit more detailled:
 
 When a filter disturbs your testing then disable it for this particular test:
 
-	\WP_PHPUnit::wp()->filter( $tag )->disable( $function_name );
+	\WP_PHPUnit::wp()->filter( $tag )->disable();
+
+Or just a specific function using:
+
+	\WP_PHPUnit::wp()->filter( $tag )->disable( $callable );
+
+Complete filters can be removed only once during a test-method.
+Removed filter will be recovered during `\WP_PHPUnit::tearDown()`.

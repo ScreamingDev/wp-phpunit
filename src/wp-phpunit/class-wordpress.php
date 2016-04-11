@@ -21,28 +21,34 @@ class WordPress {
 	 * @return \WP_PHPUnit\WordPress\Action
 	 */
 	public function action( $identifier ) {
-		$action         = new Action( $identifier );
-		$this->_parts[] = $action;
+		$name = 'action::' . $identifier;
+		if ( ! isset( $this->_parts[ $name ] ) || ! $this->_parts[ $name ] ) {
+			$this->_parts[ $name ] = new Action( $identifier );
+		}
 
-		return $action;
+		return $this->_parts[ $name ];
 	}
 
 	/**
 	 * @return Filter
 	 */
 	public function filter( $identifier ) {
-		$filter         = new Filter( $identifier );
-		$this->_parts[] = $filter;
+		$name = 'filter::' . $identifier;
+		if ( ! isset( $this->_parts[ $name ] ) || ! $this->_parts[ $name ] ) {
+			$this->_parts[ $name ] = new Filter( $identifier );
+		}
 
-		return $filter;
+		return $this->_parts[ $name ];
 	}
 
 	public function reset() {
 		$this->core()->reset();
 
-		foreach ( $this->_parts as $part ) {
+		foreach ( $this->_parts as $tag => $part ) {
 			/** @var Abstract_Part $part */
 			$part->reset();
+
+			unset( $this->_parts[ $tag ] );
 		}
 	}
 

@@ -8,6 +8,7 @@ abstract class Abstract_Part {
 	protected $_disabled_filter    = [ ];
 	protected $_registered_actions = [ ];
 	protected $_registered_filter  = [ ];
+	protected $_removed_filter = [ ];
 
 	public function reset() {
 		$this->resetFilter();
@@ -15,6 +16,14 @@ abstract class Abstract_Part {
 	}
 
 	protected function resetFilter() {
+		// recover filter
+		foreach ( $this->_removed_filter as $tag => $value ) {
+			$GLOBALS['wp_filter'][ $tag ] = $value;
+
+			unset( $this->_removed_filter[ $tag ] );
+		}
+
+
 		// removed mocked actions
 		foreach ( $this->_registered_filter as $tag => $functions ) {
 			foreach ( $functions as $callable ) {
@@ -53,6 +62,18 @@ abstract class Abstract_Part {
 	}
 
 	protected function disable_filter( $tag, $callable ) {
+		if ( isset( $this->_removed_filter[ $tag ] ) && $this->_removed_filter[ $tag ] ) {
+			throw new \OverflowException( 'You can disable a complete filter only once.' );
+		}
+
+		if ( null === $callable ) {
+			$this->_removed_filter[ $tag ] = $GLOBALS['wp_filter'][ $tag ];
+
+			$GLOBALS['wp_filter'][ $tag ] = [ ];
+
+			return;
+		}
+
 		$priority = has_filter( $tag, $callable );
 
 		if ( false === $priority ) {
