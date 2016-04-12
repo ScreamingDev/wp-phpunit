@@ -28,7 +28,7 @@ This supports:
 
 - Expect actions to occur via `\WP_PHPUnit::wp()->action( $tag )->expected()`.
 
-Read more in the docs [docs/action.md].
+[Read more about mocking and asserting actions in the documentation](docs/actions.md).
 
 ## Core
 
@@ -38,7 +38,7 @@ Read more in the docs [docs/action.md].
   and where they are going to via `\WP_PHPUnit::wp()->core()->expectWpRedirect()`.
 
 
-Read more in the docs [doc/core.md].
+[Read more about changing core functions in the documentation](docs/core.md).
 
 ## Filter
 
@@ -48,7 +48,7 @@ Read more in the docs [doc/core.md].
   **how often** they are called
   and check for expected **arguments**.
 
-Read more in [docs/filter.md].
+[Read more about mocking and expecting filters in the documentation](docs/filter.md).
 
 ## Options
 
@@ -56,4 +56,4 @@ Read more in [docs/filter.md].
   Make them unchangeable during your test
   and/or return a specific value that you need.
 
-Read more in [docs/options.md].
+[Read more about working with options during test in the documentation](docs/options.md).
