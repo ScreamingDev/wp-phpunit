@@ -26,88 +26,34 @@ This supports:
 
 ## Actions
 
-### Expect actions
+- Expect actions to occur via `\WP_PHPUnit::wp()->action( $tag )->expected()`.
 
-Write your test and assert the execution of actions:
-
-	\WP_PHPUnit::wp()->action( $tag )->expected();
-
-Or a bit more detailled:
-
-	// expect it not more than once
-	\WP_PHPUnit::wp()->action( $tag )->expected()->atMost()->once();
-    
-	// expect the action with specific values
-	\WP_PHPUnit::wp()->action( $tag )->expected()->with( [ 'value1', 'value2' ] );
-
-	// or both
-	\WP_PHPUnit::wp()->action( $tag )->expected()->with( [ 'value1', 'value2' ] )->atMost()->once();
+Read more in the docs [docs/action.md].
 
 ## Core
 
-### Check for `wp_die`
+- Mock or check for `wp_die()`.
+  It won't ever disturb your testing.
+- Check **redirects** if they occur
+  and where they are going to via `\WP_PHPUnit::wp()->core()->expectWpRedirect()`.
 
-Disable or just check if `wp_die` has been used:
 
-	\WP_PHPUnit::wp()->core()->expectWpDie();
-
-### Check for redirects
-
-Test if `wp_redirect` is used:
-
-	\WP_PHPUnit::wp()->core()->expectWpRedirect();
-
-You can check for specific arguments:
-
-	// A location and some status
-	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( 'http://example.org', anything() );
-	
-	// Any location and a specific status
-	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( anything(), 303 );
-	
-	// Or a specific location and status exactly once
-	\WP_PHPUnit::wp()->core()->expectWpRedirect()->with( 'http://example.org', 303 )->times(1);
+Read more in the docs [doc/core.md].
 
 ## Filter
 
-### Assertion on filter
+- **Disable** a filter
+  so that it does not harm your tests.
+- Make assertions on filter
+  **how often** they are called
+  and check for expected **arguments**.
 
-Expect the execution of a filter:
-
-	\WP_PHPUnit::wp()->filter( $tag )->expected();
-
-Or a bit more detailled:
-
-	// expect it not more than once
-	\WP_PHPUnit::wp()->filter( $tag )->expected()->atMost()->once();
-    
-	// expect the filter with specific values
-	\WP_PHPUnit::wp()->filter( $tag )->expected()->with( 'value1' );
-
-	// or both
-	\WP_PHPUnit::wp()->filter( $tag )->expected()->with( 'value1' )->atMost()->once();
-
-### Disable filter
-
-When a filter disturbs your testing then disable it for this particular test:
-
-	\WP_PHPUnit::wp()->filter( $tag )->disable();
-
-Or just a specific function using:
-
-	\WP_PHPUnit::wp()->filter( $tag )->disable( $callable );
-
-Complete filters can be removed only once during a test-method.
-Removed filter will be recovered during `\WP_PHPUnit::tearDown()`.
+Read more in [docs/filter.md].
 
 ## Options
 
-### Freeze values
+- **Lock values** of a single option.
+  Make them unchangeable during your test
+  and/or return a specific value that you need.
 
-Make an option unchangeable
-
-	// Keep the value
-	\WP_PHPUnit::wp()->option( $tag )->lockValue();
-	
-	// or have one for the whole test
-	\WP_PHPUnit::wp()->option( $tag )->lockValue( $value );
+Read more in [docs/options.md].
