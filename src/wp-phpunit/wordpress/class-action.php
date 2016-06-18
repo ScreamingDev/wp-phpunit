@@ -3,6 +3,21 @@
 namespace WP_PHPUnit\WordPress;
 
 class Action extends Abstract_Named_Part {
+	public function assertCalled() {
+		global $merged_filters;
+
+		if ( isset( $merged_filters[ $this->getName() ] ) ) {
+			return;
+		}
+
+		throw new \Exception(
+			sprintf(
+				'Filter %s has not been called.',
+				$this->getName()
+			)
+		);
+	}
+
 	/**
 	 * @param $action
 	 *

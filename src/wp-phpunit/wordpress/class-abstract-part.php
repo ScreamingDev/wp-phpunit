@@ -44,6 +44,12 @@ abstract class Abstract_Part {
 		}
 	}
 
+	protected function recoverGlobals() {
+		foreach ( $this->_globalsBackup as $name => $value ) {
+			$GLOBALS[ $name ] = $value;
+		}
+	}
+
 	protected function add_action( $tag, $function_to_add, $priority = 10, $accepted_args = 1 ) {
 		if ( ! isset( $this->_registered_actions[ $tag ] ) ) {
 			$this->_registered_actions[ $tag ] = [ ];
