@@ -2,9 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-use WP_PHPUnit\Framework\Interceptor;
-
-abstract class Abstract_Named_Part extends Abstract_Part {
+abstract class AbstractNamedPart extends AbstractPart {
 	protected $_name;
 
 	public function __construct( $identifier ) {

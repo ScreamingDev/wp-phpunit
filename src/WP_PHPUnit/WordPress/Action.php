@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Action extends Abstract_Named_Part {
+class Action extends AbstractNamedPart {
 	public function assertCalled() {
 		global $merged_filters;
 

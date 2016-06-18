@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Core extends Abstract_Part {
+class Core extends AbstractPart {
 	/**
 	 * @return \Mockery\Expectation
 	 */

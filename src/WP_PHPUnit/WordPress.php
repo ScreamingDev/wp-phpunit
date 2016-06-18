@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit;
 
-use WP_PHPUnit\WordPress\Abstract_Part;
+use WP_PHPUnit\WordPress\AbstractPart;
 use WP_PHPUnit\WordPress\Action;
 use WP_PHPUnit\WordPress\Core;
 use WP_PHPUnit\WordPress\Filter;
@@ -58,7 +58,7 @@ class WordPress {
         $this->core()->reset();
 
         foreach ( (array) $this->_parts as $tag => $part ) {
-            /** @var Abstract_Part $part */
+            /** @var AbstractPart $part */
             $part->reset();
 
             unset( $this->_parts[ $tag ] );

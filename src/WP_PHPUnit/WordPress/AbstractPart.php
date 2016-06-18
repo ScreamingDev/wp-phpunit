@@ -4,7 +4,7 @@ namespace WP_PHPUnit\WordPress;
 
 use WP_PHPUnit\Framework\Interceptor;
 
-abstract class Abstract_Part {
+abstract class AbstractPart {
 	protected $_disabled_filter    = [ ];
 	protected $_registered_actions = [ ];
 	protected $_registered_filter  = [ ];

@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Filter extends Abstract_Named_Part {
+class Filter extends AbstractNamedPart {
 	protected $registered = [ ];
 
 	public function disable( $callable = null ) {

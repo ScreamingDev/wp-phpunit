@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit\WordPress;
 
-class Option extends Abstract_Named_Part {
+class Option extends AbstractNamedPart {
 	public function lockValue( $value = null ) {
 		if ( null === $value ) {
 			$value = get_option( $this->getName() );
