@@ -14,6 +14,9 @@
     "bin-dir": "bin"
   },
   "autoload": {
+    "psr-4": {
+      "WP_PHPUnit\\": "src/WP_PHPUnit"
+    },
     "files": [
       "src/autoload.php"
     ]
