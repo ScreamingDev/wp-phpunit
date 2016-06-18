@@ -2,7 +2,7 @@
 
 namespace WP_PHPUnit\Framework;
 
-class Test_Case extends \PHPUnit_Framework_TestCase {
+class TestCase extends \PHPUnit_Framework_TestCase {
 	/**
 	 * @return \WP_PHPUnit\WordPress
 	 */
