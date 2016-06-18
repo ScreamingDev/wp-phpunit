@@ -11,7 +11,7 @@ php:
   - 7.0
 
 env:
-  - WP_VERSION=4.5-beta3    WP_MULTISITE=0
+  - WP_VERSION=4.5          WP_MULTISITE=0
   - WP_VERSION=4.4          WP_MULTISITE=0
   - WP_VERSION=4.3          WP_MULTISITE=0
   - WP_VERSION=4.2          WP_MULTISITE=0
